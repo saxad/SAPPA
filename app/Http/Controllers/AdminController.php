@@ -1,0 +1,113 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\User;
+use App\Tools;
+use App\Categories;
+use App\Department;
+use App\Bo;
+
+class AdminController extends Controller
+{
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
+    public function index(){
+        $departments = Department::all();
+        $tools = Tools::all();
+        $users = User::all();
+        $categories = Categories::all();
+        $bos = Bo::all();
+               
+        return view('admin.administration', compact('users','tools','categories','departments','bos'));
+    }
+
+
+    public function destroyUser($id){
+        
+        $user = User::findOrFail($id);
+
+        $user->delete();
+        
+        return back()->with('success','utilisateur supprimé !');
+    }
+
+    public function destroyTool($id){
+        
+        
+        $tool = Tools::findOrFail($id);
+        // example:
+              
+
+        $tool->delete();
+     
+        return redirect()->back();
+    }
+
+    public function storeTool(Request $request )
+    {
+        $tool = new Tools();
+
+        $tool->name = $request->name;
+        $tool->category_id = $request->category;
+        $tool->description = $request->description;
+        $tool->url = $request->url;
+        $tool->save();
+        return back()->with('sucess','outil ajouté !');
+    }
+
+    public function editTool(Request $request){
+        $tool = Tools::findOrFail($request->toolID);
+        $tool->name = $request->name;
+        $tool->url = $request->url;
+        $tool->description = $request->description;
+        $tool->category_id = $request->category;
+        $tool->save();
+
+        return back()->with('sucess','bo ajouté !');
+    }
+    
+    
+    public function destroyCategory($id){
+        
+        
+        $category = Categories::findOrFail($id);
+        
+              
+
+        $category->delete();
+     
+        return redirect()->back();
+    }
+
+    public function storeBo(Request $request){
+
+        $bo = new BO();
+
+        //dd($request);
+        $bo->ae_name = $request->{'ae-name'};
+        $bo->ae_code = $request->{'ae-code'};
+        $bo->bo_name = $request->{'bo-name'};
+        $bo->bo_code = $request->{'bo-code'};
+        $bo->color = $request->{'color-code'};
+        $bo->zex = $request->zex;
+        $bo->email = $request->{'bo-email'};
+        $bo->department_id = $request->department;
+
+        $bo->save();
+        return back()->with('sucess','bo ajouté !');
+    }
+
+    public function storeCategory(Request $request){
+        $category = new Categories();
+
+        $category->name = $request->{'category-name'};
+        $category->save();
+        return back()->with('sucess','categorie ajoutée !');
+    }
+}
