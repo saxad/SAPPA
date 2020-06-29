@@ -85,7 +85,7 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    
+
     public function editCategory(Request $request){
         $category = Categories::findOrFail($request->editCategoryID);
         $category->name  = $request->editCategoryName;
@@ -118,5 +118,39 @@ class AdminController extends Controller
         $category->name = $request->{'category-name'};
         $category->save();
         return back()->with('sucess','categorie ajoutée !');
+    }
+
+
+    public function storeDepartment(Request $request){
+        $department = new Department();
+        
+        $department->department_name    = $request->departmentName;
+        $department->department_code    = $request->departmentCode;
+        $department->centre_code = $request->codeCenter;
+
+        $department->save();
+        return back()->with('sucess','departement ajouté !');
+    }
+
+    public function destroyDepartment($id){
+        $department = Department::findOrFail($id);
+        
+              
+
+        $department->delete();
+     
+        return redirect()->back();
+    }
+
+    public function editDepartment(Request $request){
+
+        $department = Department::findOrFail($request->editDepartmentID);
+     //   dd($request);
+        $department->department_name = $request->editDepartmentName;
+        $department->department_code = $request->editDepartmentCode;
+        $department->centre_code = $request->editDepartmentCodeCenter;
+
+        $department->save();
+        return back()->with('sucess','departement ajouté !');
     }
 }

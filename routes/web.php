@@ -59,6 +59,11 @@ Route::patch('/administration/editTool','AdminController@editTool')->name('editT
 Route::post('/administration/storeBo','AdminController@storeBo')->name('storeBo');
 Route::post('/administration/storeCategory','AdminController@storeCategory')->name('storeCategory');
 
+
+Route::post('/administration/storeDepartment','AdminController@storeDepartment')->name('storeDepartment');
+Route::get('/administration/deleteDepartment/{id}','AdminController@destroyDepartment')->name('deleteDepartment');
+Route::patch('/administration/editDepartment','AdminController@editDepartment')->name('editDepartment');
+
 /**
  * routes event
  */

@@ -257,30 +257,21 @@
                           <h4 class="modal-title">ajout de l'outil</h4>
                         </div>
                           <div class="modal-body">
-                                        <form class="col" action="{{route('storeTool')}}" method="post">
+                                        <form class="col" action="{{route('storeDepartment')}}" method="post">
                                         @csrf
                                           <div class="form-group">
-                                            <label for="name" class="form-control-label">Nom de l'outil</label>
-                                            <input type="text" class="form-control" name ="name" id="nom" placeholder="nom de l'outil">
+                                            <label for="departmentName" class="form-control-label">Nom du departement</label>
+                                            <input type="text" class="form-control" name ="departmentName" id="departmentName" placeholder="Nom du departement">
                                           </div>
                                           <div class="form-group">
-                                            <label for="url" class="form-control-label">url</label>
-                                            <input type="text" class="form-control" name="url" id="url" placeholder="https://url">
+                                            <label for="departmentCode" class="form-control-label">Code du departement</label>
+                                            <input type="text" class="form-control" name="departmentCode" id="departmentCode" placeholder="Code du departement">
                                           </div>
                                           <div class="form-group">
-                                            <label for="description" class="form-control-label">description</label>
-                                            <textarea name="description" class="form-control" id="description" cols="30" rows="3"></textarea>
-                                            <!-- <input type="text" class="form-control" name="url" id="url" placeholder="https://url"> -->
+                                            <label for="codeCenter" class="form-control-label">Code du centre</label>
+                                            <input type="text" class="form-control" name="codeCenter" id="codeCenter" value="257">
                                           </div>
-                                            <div class="form-group">
-                                            <select class="form-control" name="category" id="">
-
-                                            @foreach($categories as $category )
-                                               <option value="{{$category->id}}">{{$category->name}}</option> 
-                                            @endforeach  
-                                             
-                                            </select>
-                                          </div>
+                                         
                                           <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
                                         </form>
                           </div>
@@ -290,15 +281,58 @@
                   </div>
                 </div>
               </div>
-              <!-- modal departement form -->
+              <!-- // modal departement form -->
+
+              <!-- modal edit department form -->
+              <div class="modal fade" id="editdepartment">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                  <span>&times;</span>
+                                </button>            
+                          <h4 class="modal-title">ajout de l'outil</h4>
+                        </div>
+                          <div class="modal-body">
+                                        <form class="col" action="{{route('editDepartment')}}" method="post">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="editDepartmentID" class="form-control-label">ID du departement</label>
+                                            <input type="text" class="form-control" name ="editDepartmentID" id="editDepartmentID" readonly>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editDepartmentName" class="form-control-label">Nom du departement</label>
+                                            <input type="text" class="form-control" name ="editDepartmentName" id="editDepartmentName" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editDepartmentCode" class="form-control-label">Code du departement</label>
+                                            <input type="text" class="form-control" name="editDepartmentCode" id="editDepartmentCode" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editDepartmentCodeCenter" class="form-control-label">Code du centre</label>
+                                            <input type="text" class="form-control" name="editDepartmentCodeCenter" id="editDepartmentCodeCenter" value="257">
+                                          </div>
+                                         
+                                          <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                                        </form>
+                          </div>
+                          <div class="modal-footer">
+                            <em></em>
+                          </div>
+                  </div>
+                </div>
+              </div>
+              <!-- // modal edit departement form -->
                 <h4><i class="fa fa-angle-right"></i>Departements</h4> 
                
               </div>
               
                 <div class="panel-body text-center">
-                  <table class="table table-striped table-advance table-hover">
+                  <table class="table table-striped table-advance table-hover" id="departmentTable">
                     <thead>
                       <tr>
+                      <th><i class="fa fa-bullhorn"></i>ID</th>
                         <th><i class="fa fa-bullhorn"></i> nom</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>code</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>code centre</th>
@@ -308,24 +342,21 @@
                     <tbody>
                          @foreach($departments as $department)
                       <tr>
-                        <td>
-                          <a href="#">{{$department->department_name}}</a>
-                        </td>
-                        <td class="hidden-phone">{{$department->department_code}}</td>
-                        <td class="hidden-phone">{{$department->centre_code}}</td>
+                        <td class="departmentID">{{$department->id}}</td>
+                        <td class="departmentName">{{$department->department_name}}</td>
+                        <td class="hidden-phone departmentCode">{{$department->department_code}}</td>
+                        <td class="hidden-phone codeCenter">{{$department->centre_code}}</td>
                        
 
                         <td>
 
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <form action="" method="post">
-                              @csrf 
-                              {{method_field('DELETE')}}
-                              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                          </form>
+                          <button data-toggle="modal" data-target="#editdepartment" class="btn btn-primary editDepartmentBtn btn-xs"><i class="fa fa-pencil"></i></button>
+                         
+                          <button  type="submit" class="btn btn-danger btn-xs"> <a class="delete-tool" href="/sappaDev/sappa/public/administration/deleteDepartment/{{$department->id}}"><i class="fa fa-trash-o "></i></a> </button>
                         </td>
                       </tr>
                       @endforeach
+                      </tbody>
                   </table>
                 </div>
               </div>
@@ -581,9 +612,19 @@
 <script>
 
 let categoryTable = $('#categoryTable');
-console.log(categoryTable)
 let toolTable = $('#toolTable');
+let departmentTable = $('#departmentTable');
 
+
+departmentTable.on('click', '.editDepartmentBtn',function(){
+  var tr = $(this).closest('tr');
+ 
+  $('#editDepartmentID').val(tr.children('.departmentID').text());
+  $('#editDepartmentName').val(tr.children('.departmentName').text());
+  $('#editDepartmentCode').val(tr.children('.departmentCode').text());
+  $('#editDepartmentCodeCenter').val(tr.children('.codeCenter').text());
+
+});
 
 toolTable.on('click', '.editToolBtn',function(){
 
