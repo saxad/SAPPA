@@ -51,6 +51,8 @@ Route::get('/administration/deleteUser/{id}','AdminController@destroyUser')->nam
 Route::delete('/administration/deleteTool/{id}','AdminController@destroyTool')->name('deleteTool');
 Route::get('/administration/deleteTool/{id}','AdminController@destroyTool')->name('deleteTool');
 Route::get('/administration/deleteCategory/{id}','AdminController@destroyCategory')->name('deleteCategory');
+Route::patch('/administration/editCategory','AdminController@editCategory')->name('editCategory');
+
 Route::post('/administration/storeTool','AdminController@storeTool')->name('storeTool');
 Route::patch('/administration/editTool','AdminController@editTool')->name('editTool');
 

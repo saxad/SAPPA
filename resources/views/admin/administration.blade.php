@@ -365,16 +365,51 @@
                   </div>
                 </div>
               </div>
-              <!-- modal category form -->
+              <!-- // modal  category form -->
+
+              <!-- modal edit category form -->
+               <div class="modal fade" id="editCategory">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                  <span>&times;</span>
+                                </button>            
+                          <h4 class="modal-title">ajout d'une categorie</h4>
+                        </div>
+                          <div class="modal-body">
+                                        <form class="col" action="{{route('editCategory')}}" method="post">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="editCategoryID" class="form-control-label">ID de la categorie</label>
+                                            <input type="text" class="form-control" name ="editCategoryID" id="editCategoryID" readonly>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editCategoryName" class="form-control-label">Nom de la categorie</label>
+                                            <input type="text" class="form-control" name ="editCategoryName" id="editCategoryName">
+                                          </div>
+
+                                          <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                                        </form>
+                          </div>
+                          <div class="modal-footer">
+                            <em></em>
+                          </div>
+                  </div>
+                </div>
+              </div>
+              <!-- // modal edit  category form -->
                 <h4><i class="fa fa-angle-right"></i>Categories d'outils</h4> 
                
               </div>
               
                 <div class="panel-body text-center">
-                  <table class="table table-striped table-advance table-hover">
+                  <table class="table table-striped table-advance table-hover" id="categoryTable">
                     <thead>
                       <tr>
-                        <th><i class="fa fa-bullhorn"></i> nom</th>
+                      <th><i class="fa fa-bullhorn " ></i> ID</th>
+                        <th><i class="fa fa-bullhorn " ></i> nom</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i> crée le </th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i> mis a jours le </th>
                         <th>actions</th>
@@ -383,16 +418,15 @@
                     <tbody>
                          @foreach($categories as $category)
                       <tr>
-                        <td>
-                          <a href="#">{{$category->name}}</a>
-                        </td>
+                        <td class="categoryID">{{$category->id}} </td>                        
+                        <td class="categoryName">{{$category->name}} </td>
                         <td class="hidden-phone">{{$category->created_at}}</td>
                         <td class="hidden-phone">{{$category->updated_at}}</td>
                        
 
                         <td>
 
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                          <button data-toggle="modal" data-target="#editCategory" class="btn btn-primary editCategoryBtn btn-xs"><i class="fa fa-pencil"></i></button>
 
                            <button  type="submit" class="btn btn-danger btn-xs"> <a class="delete-category" href="/sappaDev/sappa/public/administration/deleteCategory/{{$category->id}}"><i class="fa fa-trash-o "></i></a> </button>
                         </td>
@@ -546,6 +580,8 @@
 
 <script>
 
+let categoryTable = $('#categoryTable');
+console.log(categoryTable)
 let toolTable = $('#toolTable');
 
 
@@ -566,6 +602,15 @@ toolTable.on('click', '.editToolBtn',function(){
     }
   });
  
+
+});
+
+categoryTable.on('click', '.editCategoryBtn', function(){
+  
+  var tr = $(this).closest('tr');
+
+  $('#editCategoryID').val(tr.children('.categoryID').text());
+  $('#editCategoryName').val(tr.children('.categoryName').text());
 
 });
 

@@ -85,6 +85,15 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
+    
+    public function editCategory(Request $request){
+        $category = Categories::findOrFail($request->editCategoryID);
+        $category->name  = $request->editCategoryName;
+        $category->save();
+        return back()->with('sucess','bo ajouté !');
+        
+    }
+
     public function storeBo(Request $request){
 
         $bo = new BO();
