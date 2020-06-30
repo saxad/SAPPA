@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Bo;
 use App\Poste;
+use App\Depart;
 
 class SchemaController extends Controller
 {
@@ -19,7 +20,12 @@ class SchemaController extends Controller
     public function getschema($id)
     {
         $poste = Poste::findOrFail($id);
-        
-        return $poste;
+        $departs =  Depart::where('poste_id',$id)->get();
+        //dd(departs);
+        //dd($poste);
+        $data = array();
+        $data['departs'] = $departs;
+        $data['poste'] = $poste;
+        return json_encode($data);
     }
 }

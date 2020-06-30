@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
- 
    
         <section class="wrapper site-min-height">
+        
+
                 <h3><i class="fa fa-angle-right"></i> Schemas : {{$bo->bo_name}}</h3>
                 <!-- Liste postess source -->
                 <div class="row mt">
@@ -40,7 +41,7 @@
                     <div class="col-md-12">
                         <div class="content-panel">
                             <table class="table table-striped table-advance table-hover">
-                                <h4><i class="fa fa-angle-right"></i> Schémas Poste Source : 'PS selectionné' </h4>
+                                <h4 ><i class="fa fa-angle-right"></i> Schémas Poste Source : <span id="posteTitle"></span>  </h4>
                                 <hr>
                                 <thead>
                                     <tr>
@@ -56,25 +57,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="posteTable">
 
-                                    <tr>
-                                        <td>
-                                            <a href="basic_table.html#">Dashio ext</a>
-                                        </td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td>22000.50$ </td>
-                                        <td>22000.50$ </td>
-                                        <td><span class="label label-success label-mini">Paid</span></td>
-                                        <td>
-                                            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-danger btn-xs"><i
-                                                    class="fa fa-trash-o "></i></button>
-                                        </td>
-                                    </tr>
+                                
 
                                 </tbody>
                             </table>
@@ -113,30 +98,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="departsTable">
 
-                                    <tr>
-                                        <td>
-                                            <a href="basic_table.html#">Dashio ext</a>
-                                        </td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td class="hidden-phone">Lorem Ipsum dolor</td>
-                                        <td>22000.50$ </td>
-                                        <td><span class="label label-success label-mini">Paid</span></td>
-                                        <td>
-                                            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
-                                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-danger btn-xs"><i
-                                                    class="fa fa-trash-o "></i></button>
-                                        </td>
-                                    </tr>
+                                 
                              
                                 
 
@@ -169,17 +133,77 @@ $(document).on('change','.poste',function(){
     var url =  '{{ route("posteSchemas",":postId" )}}';
     url = url.replace(':postId', posteId);
   
- ;
+ 
     
     $.ajax({
 
         type : 'GET',
         url : url,
-      
+        
         success : function(data){
-            console.log(data);
-            console.log(data.id);
+
+            var data  = JSON.parse(data);
+            console.log(data.departs);
+            let poste = data.poste;
+            let departs = data.departs;
+            let departsTable = '';
+            let posteTable = '';
+
+            let title = $('#posteTitle').text();
+            console.log(title)
+            
+            title =  poste.name;
+            
+            $('#posteTitle ').empty();
+            $('#posteTitle ').html(title);
+            title = '';
+            
+
+            posteTable = '<tr>'
+            posteTable += '<td>' + poste.id + '</td>';
+            posteTable += '<td>' + poste.name + '</td>';
+            posteTable += '<td>' + 'path to schema' + '</td>';
+            posteTable += '<td>' + 'path to visio' + '</td>';
+            posteTable += '<td>' + 'poste.FCMO' + '</td>';
+            posteTable += '<td>' + 'fichie iomt' + '</td>';
+            posteTable += '<td>' + poste.updated_at + '</td>';
+            posteTable += ` <td>
+                                            <button class="btn btn-success btn-xs"><i class="fa fa-check"></i></button>
+                                            <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-danger btn-xs"><i
+                                                    class="fa fa-trash-o "></i></button>
+                                        </td>`;
+            $('#posteTable').empty();
+            $('#posteTable').append(posteTable);
+            posteTable += '</tr>';
+            var i = 0;
+            for( i = 0; i < departs.length;  i++ ){
+                console.log(departs[i]);
+                departsTable +='<tr>';
+                departsTable += '<td>' + departs[i].id + '</td>';
+                departsTable += '<td><i class="fa fa-file"></i> ' + departs[i].name + '</td>';
+                departsTable += '<td>' + 'depart schemapdf ' + '</td>';
+                departsTable += '<td>' + 'depart visio' + '</td>';
+                departsTable += '<td>' + 'depart schemapdf n-1' + '</td>';
+                departsTable += '<td>' + 'depart schema visio n-1' + '</td>';
+                departsTable += '<td>' + 'rdcr schema' + '</td>';
+                departsTable += '<td>' + 'autoprod' + '</td>';
+                departsTable += '<td>' + 'tension hta' + '</td>';
+                departsTable += '<td>' + departs[i].comment + '</td>';
+                departsTable += '<td>' + departs[i].updated_at + '</td>';
+
+                departsTable += '</tr>';
+
+            }
+            $('#departsTable').empty();
+            $('#departsTable').append(departsTable);
+         
+        },
+        error: function (e) {
+                console.log('e.responseText');
+                $('#saad').html('lorem Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste incidunt facere repudiandae neque, consectetur dignissimos doloribus fugiat, ex nihil mollitia nemo ut laborum rem et dicta blanditiis accusamus, laudantium perspiciatis.');
         }
+        
 
     });
 })
