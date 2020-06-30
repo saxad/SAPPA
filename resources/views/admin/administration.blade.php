@@ -541,15 +541,83 @@
                   </div>
                 </div>
               </div>
-              <!-- modal bo form -->
+              <!-- // modal  bo form -->
+
+              <!-- modal edit bo form -->
+                <div class="modal fade" id="editbo">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                  <span>&times;</span>
+                                </button>            
+                          <h4 class="modal-title">ajout de base opérationnelle</h4>
+                        </div>
+                          <div class="modal-body">
+                                        <form class="col" action="{{route('editBo')}}" method="post">
+                                        @method('PATCH')
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="editBoID" class="form-control-label">ID de la BO</label>
+                                            <input type="text" class="form-control" name ="editBoID" id="editBoID" readonly>
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoName" class="form-control-label">Nom de la BO</label>
+                                            <input type="text" class="form-control" name ="editBoName" id="editBoName" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoCode" class="form-control-label">Code BO</label>
+                                            <input type="text" class="form-control" name="editBoCode" id="editBoCode" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoAeName" class="form-control-label">Nom de  l'ae</label>
+                                            <input type="text" class="form-control" name="editBoAeName" id="editBoAeName" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoAeCode" class="form-control-label">Code ae</label>
+                                            <input type="text" class="form-control" name="editBoAeCode" id="editBoAeCode" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoColorCode" class="form-control-label">Code Couleur</label>
+                                            <input type="color" class="form-control" name="editBoColorCode" id="editBoColorCode" >
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoZex" class="form-control-label">ZEX</label>
+                                            <input type="text" class="form-control" name="editBoZex" id="editBoZex">
+                                          </div>
+                                          <div class="form-group">
+                                            <label for="editBoEmail" class="form-control-label">Email</label>
+                                            <input type="text" class="form-control" name="editBoEmail" id="editBoEmail" >
+                                          </div>
+                                                
+                                            <div class="form-group">
+                                            <select class="form-control" name="editBoDepartment" id="editBoDepartment">
+
+                                            @foreach($departments as $department)
+                                               <option value="{{$department->id}}">{{$department->department_name}}</option> 
+                                            @endforeach  
+                                             
+                                            </select>
+                                          </div>
+                                          <button type="submit" class="btn btn-primary pull-right">Envoyer</button>
+                                        </form>
+                          </div>
+                          <div class="modal-footer">
+                            <em></em>
+                          </div>
+                  </div>
+                </div>
+              </div>
+              <!-- // modal edit bo form -->
                 <h4><i class="fa fa-angle-right"></i>BO</h4> 
                
               </div>
               
                 <div class="panel-body text-center">
-                  <table class="table table-striped table-advance table-hover">
+                  <table class="table table-striped table-advance table-hover" id="boTable">
                     <thead>
                       <tr>
+                      <th><i class="fa fa-bullhorn"></i> ID</th>
                         <th><i class="fa fa-bullhorn"></i> nom ae</th>
                         <th class="hidden-phone"><i class="fa fa-question-circle"></i>code ae</th>
                         <th><i class="fa fa-bullhorn"></i> nom bo</th>
@@ -564,28 +632,24 @@
                     <tbody>
                          @foreach($bos as $bo)
                       <tr>
-                        <td>
-                          <a href="#">{{$bo->ae_name}}</a>
-                        </td>
-                        <td class="hidden-phone">{{$bo->ae_code}}</td>
-                        <td class="hidden-phone">{{$bo->bo_name}}</td>
-                        <td class="hidden-phone">{{$bo->bo_code}}</td>
+                         <td class="BoID">{{$bo->id}} </td>
+                        <td class="BoAeName">{{$bo->ae_name}} </td>
+                        <td class="hidden-phone BoAeCode">{{$bo->ae_code}}</td>
+                        <td class="hidden-phone BoName">{{$bo->bo_name}}</td>
+                        <td class="hidden-phone BoCode">{{$bo->bo_code}}</td>
                         
                         
-                        <td class="hidden-phone"> <input type="color" name="" id="" value="{{$bo->color}}"></td>
-                        <td class="hidden-phone">{{$bo->zex}}</td>
-                        <td class="hidden-phone">{{$bo->email}}</td>
-                        <td class="hidden-phone">{{$bo->department->department_name}}</td>
+                        <td class="hidden-phone BoColorCode"> <input type="color" name="" id="" value="{{$bo->color}}"></td>
+                        <td class="hidden-phone BoZex">{{$bo->zex}}</td>
+                        <td class="hidden-phone BoEmail">{{$bo->email}}</td>
+                        <td class="hidden-phone BoDepartment">{{$bo->department->department_name}}</td>
                        
 
                         <td>
 
-                          <button class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></button>
-                          <form action="" method="post">
-                              @csrf 
-                              {{method_field('DELETE')}}
-                              <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
-                          </form>
+                          <button data-toggle="modal" data-target="#editbo" class="btn btn-primary editBoBtn btn-xs"><i class="fa fa-pencil"></i></button>
+                          <button  type="submit" class="btn btn-danger btn-xs"> <a class="delete-category" href="/sappaDev/sappa/public/administration/deleteBo/{{$bo->id}}"><i class="fa fa-trash-o "></i></a> </button>
+
                         </td>
                       </tr>
                       @endforeach
@@ -611,10 +675,32 @@
 
 <script>
 
+let boTable = $('#boTable');
 let categoryTable = $('#categoryTable');
 let toolTable = $('#toolTable');
 let departmentTable = $('#departmentTable');
 
+boTable.on('click','.editBoBtn', function(){
+  
+  var tr = $(this).closest('tr');
+  
+  $('#editBoID').val(tr.children('.BoID').text());
+  $('#editBoName').val(tr.children('.BoName').text());
+  $('#editBoCode').val(tr.children('.BoCode').text());
+  $('#editBoAeName').val(tr.children('.BoAeName').text());
+  $('#editBoAeCode').val(tr.children('.BoAeCode').text());
+  $('#editBoColorCode').val(tr.children('.BoColorCode').children('input').val());
+  $('#editBoZex').val(tr.children('.BoZex').text());
+  $('#editBoEmail').val(tr.children('.BoEmail').text());
+  $('#editBoDepartment option').each(function(){
+
+    if( $(this).text() === tr.children('.BoDepartment').text()){
+      $(this).prop('selected', true);
+    }
+  })
+  
+
+})
 
 departmentTable.on('click', '.editDepartmentBtn',function(){
   var tr = $(this).closest('tr');
@@ -623,6 +709,7 @@ departmentTable.on('click', '.editDepartmentBtn',function(){
   $('#editDepartmentName').val(tr.children('.departmentName').text());
   $('#editDepartmentCode').val(tr.children('.departmentCode').text());
   $('#editDepartmentCodeCenter').val(tr.children('.codeCenter').text());
+ 
 
 });
 

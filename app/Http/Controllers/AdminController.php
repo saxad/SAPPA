@@ -112,6 +112,34 @@ class AdminController extends Controller
         return back()->with('sucess','bo ajouté !');
     }
 
+    public function editBo(Request $request){
+      //  dd($request);
+
+        $bo = BO::findOrFail($request->editBoID);
+
+        $bo->bo_name = $request->editBoName;
+        $bo->bo_code = $request->editBoCode;
+        $bo->ae_name = $request->editBoAeName;
+        $bo->ae_code = $request->editBoAeCode;
+        $bo->color = $request->editBoColorCode;
+        $bo->zex = $request->editBoZex;
+        $bo->email = $request->editBoEmail;
+        $bo->department_id = $request->editBoDepartment;
+
+        $bo->save();
+
+        return back()->with('sucess','Bo modifié !');
+    }
+
+    public function destroyBo($id){
+
+        $bo = BO::findOrFail($id);
+
+        $bo->delete();
+     
+        return redirect()->back();
+    }
+
     public function storeCategory(Request $request){
         $category = new Categories();
 
