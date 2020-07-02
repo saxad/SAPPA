@@ -18,7 +18,7 @@ class CreatePostesTable extends Migration
             $table->string('name');
             $table->string('code_gdo');
             $table->string('name_gari');
-            $table->string('color');
+            $table->string('color')->nullable();
             $table->string('schema');
 
             $table->unsignedBigInteger('bo_id')->default(1);
