@@ -3,15 +3,13 @@
 @section('content')
 
 
-
-
 <section class="wrapper">
   <div>
     <button data-toggle="modal" data-target="#addevent" class="btn btn-theme" type="button" style="float:right;"><i
         class="fa fa-cog"></i> ajoutez un dossier sappa</button>
     <!-- modal bo form -->
     <div class="modal fade" id="addevent">
-      <div class="modal-dialog modal-lg" >
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">
@@ -49,7 +47,6 @@
                     <div id="overview" class="tab-pane active">
                       <div class="row">
                         <div class="col-md-12">
-
 
                           <div class="detailed mt">
 
@@ -144,8 +141,6 @@
 
                         </div><!-- /col-md-12 -->
 
-
-
                       </div> <!-- /row -->
 
                     </div> <!-- /OVERVIEW -->
@@ -179,8 +174,6 @@
                                 <textarea name="comment" class="form-control" id="comment" cols="30"
                                   rows="3"></textarea>
                               </div>
-
-
 
                             </form>
                           </div>
@@ -226,7 +219,6 @@
                                   </div>
                                 </div>
 
-
                               </div>
                               <div class="form-group">
                                 <label for="" class="form-control-label">N° IEP</label>
@@ -256,8 +248,6 @@
                                 <label for="" class="form-control-label">Annulé le </label>
                                 <input type="text" class="form-control" id="exampleInputFile" class="file-pos">
                               </div>
-
-
 
                             </form>
                           </div>
@@ -289,7 +279,6 @@
                                   rows="3"></textarea>
                               </div>
 
-
                             </form>
                           </div>
                         </div>
@@ -310,9 +299,6 @@
                                   <option value="">travaux 4</option>
                                 </select>
                               </div>
-
-
-
 
                             </form>
                           </div>
@@ -373,8 +359,6 @@
                               </div>
                             </div>
 
-
-
                           </form>
                         </div>
                         <div class="col-lg-8 col-lg-offset-2 detailed mt">
@@ -429,10 +413,10 @@
                             <div class="form-group">
                               <label for="" class="form-control-label">Cause de découplage </label>
                               <select name="" id="" class="form-control">
-                                <option value="">MC 1</option>
-                                <option value="">MC 2</option>
-                                <option value="">MC 3</option>
-                                <option value="">MC 4</option>
+                                <option value="">cause 1</option>
+                                <option value="">cause 2</option>
+                                <option value="">cause 3</option>
+                                <option value="">cause 4</option>
                               </select>
                             </div>
 
@@ -442,46 +426,43 @@
 
                         </div>
                         <div class="col-lg-8 col-lg-offset-2 detailed mt">
-                          <h4 class="mb">Liste des Auto-Producteur</h4>
-                          <div class="col-md-12 mt">
+                          <h4 class="mb">Liste des Auto-Producteurs</h4>
+                          {{-- <div class="col-md-12 mt"> --}}
+                          <div class="">
                             <div class="row mt">
                               <div class="col-md-12">
                                 <!--  Chantier en cours -->
                                 <div class="content-panel">
-  
+
                                   <table class="table table-striped table-advance table-hover">
-  
-  
+
                                     <thead>
                                       <tr>
                                         <th><i class="fa fa-bullhorn"></i> Nom de la MC</th>
                                         <th><i class="fa fa-bullhorn"></i> cause du découplage</th>
-  
-  
+
+
                                         <th><i class="fa fa-comments"></i> prévenir</th>
                                         <th><i class="fa fa-bookmark"></i> prévenue</th>
                                         <th><i class="fa fa-bookmark"></i> action</th>
-  
+
                                       </tr>
                                     </thead>
                                     <tbody>
-  
-  
-  
+
                                       <tr>
                                         <td class="hidden-phone">tt</td>
                                         <td> <a href="#">tt</a></td>
-  
-                                        <td><button type="submit" class="btn btn-success btn-xs"><i class="fa fa-comments-o "></i> envoyer</button></td>
-                                        <td class="hidden-phone"><span class="label label-success label-mini">oui</span></td>
-  
-  
-  
+
+                                        <td><button type="submit" class="btn btn-success btn-xs"><i
+                                              class="fa fa-comments-o "></i> envoyer</button></td>
+                                        <td class="hidden-phone"><span class="label label-success label-mini">oui</span>
+                                        </td>
+
                                         <td>
-                                          
-  
+
                                           <div class="col-md-4">
-  
+
                                             <form width="40%" style="inline-block" action="" method="post">
                                               @csrf
                                               {{method_field('DELETE')}}
@@ -489,26 +470,24 @@
                                                   class="fa fa-trash-o "></i></button>
                                             </form>
                                           </div>
-  
-  
+
                                         </td>
-  
+
                                         </td>
                                       </tr>
                                       <tr>
                                         <td class="hidden-phone">tt</td>
                                         <td> <a href="#">tt</a></td>
-  
-                                        <td><button type="submit" class="btn btn-success btn-xs"><i class="fa fa-comments-o "></i> envoyer</button></td>
-                                        <td class="hidden-phone"><span class="label label-danger label-mini">non</span></td>
-  
-  
-  
+
+                                        <td><button type="submit" class="btn btn-success btn-xs"><i
+                                              class="fa fa-comments-o "></i> envoyer</button></td>
+                                        <td class="hidden-phone"><span class="label label-danger label-mini">non</span>
+                                        </td>
+
                                         <td>
-                                          
-  
+
                                           <div class="col-md-4">
-  
+
                                             <form width="40%" style="inline-block" action="" method="post">
                                               @csrf
                                               {{method_field('DELETE')}}
@@ -516,10 +495,9 @@
                                                   class="fa fa-trash-o "></i></button>
                                             </form>
                                           </div>
-  
-  
+
                                         </td>
-  
+
                                         </td>
                                       </tr>
                                     </tbody>
@@ -560,8 +538,6 @@
   </div>
   <hr>
 
-
-
   <!-- / DATE PICKERS -->
   <div class="row mt">
     <div class="col-md-12">
@@ -569,7 +545,6 @@
       <div class="content-panel">
 
         <table class="table table-striped table-advance table-hover">
-
 
           <thead>
             <tr>
@@ -592,8 +567,6 @@
             </tr>
           </thead>
           <tbody>
-
-
 
             <tr>
               <td class="hidden-phone">20.crs.2879</td>
@@ -672,16 +645,10 @@
                   </form>
                 </div>
 
-
               </td>
 
               </td>
             </tr>
-
-
-
-
-
 
           </tbody>
         </table>
@@ -692,24 +659,16 @@
   </div>
   <!-- / tableau du PS -->
 
-
   </div>
-
 
   </div>
   <!--/  DATE PICKERS -->
   <!-- /col-lg-12 -->
-
-
-
-
 
 </section>
 <!-- /wrapper -->
 
 <!-- /MAIN CONTENT -->
 <!--main content end-->
-
-
 
 @endsection

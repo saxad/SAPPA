@@ -85,9 +85,9 @@
            
           
           <li class="mt">
-            <a class="active" href="{{ route('home') }}">
+            <a class="active" href="{{ route('sappa') }}">
               <i class="fa fa-dashboard"></i>
-              <span>Dashboard</span>
+              <span>SAPPA</span>
             </a>
           </li>
           <li class="sub-menu">

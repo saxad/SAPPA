@@ -162,7 +162,7 @@ $(document).on('change','.poste',function(){
             posteTable = '<tr>'
             posteTable += '<td>' + poste.id + '</td>';
             posteTable += '<td>' + poste.name + '</td>';
-            posteTable += '<td>' + 'path to schema' + '</td>';
+            posteTable += '<td><a href="../../storage/app/'+ poste.schema +'"> lien </a></td>';
             posteTable += '<td>' + 'path to visio' + '</td>';
             posteTable += '<td>' + 'poste.FCMO' + '</td>';
             posteTable += '<td>' + 'fichie iomt' + '</td>';

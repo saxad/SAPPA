@@ -108,16 +108,16 @@
             </section>
             <!-- /wrapper -->
 
-    <script type="text/javascript" language="javascript" src="{{ asset('js/lib/advanced-datatable/js/jquery.js') }}"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('js/lib/advanced-datatable/js/jquery.js') }}" ></script>
     
   
-    <script type="text/javascript" language="javascript" src="{{ asset('js/lib/advanced-datatable/js/jquery.dataTables.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('lib/advanced-datatable/js/DT_bootstrap.js')}}"></script>
+    <script type="text/javascript" language="javascript" src="{{ asset('js/lib/advanced-datatable/js/jquery.dataTables.js')}}" defer></script>
+    <script type="text/javascript" src="{{ asset('lib/advanced-datatable/js/DT_bootstrap.js')}}" defer></script>
 
     
 
 
-     <script type="text/javascript">
+     <script type="text/javascript" defer>
         /* Formating function for row details */
         function fnFormatDetails(oTable, nTr) {
             var aData = oTable.fnGetData(nTr);
