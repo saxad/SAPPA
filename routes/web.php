@@ -14,10 +14,23 @@ use RealRashid\SweetAlert\Facades\Alert;
 |
 */
 
+
+/**
+ *  routes home
+ */
 Route::get('/', function () {
      
     return view('home');
 })->name('home')->middleware('auth');
+
+/**
+ * routes des dossiers sappa
+ */
+ Route::get('/sappa',function(){
+     return view('sappa-folder.sappa');
+ })->name('sappa')->middleware('auth');
+
+ 
 
 /**
  *  routes schemas
@@ -68,6 +81,17 @@ Route::post('/administration/storeCategory','AdminController@storeCategory')->na
 Route::post('/administration/storeDepartment','AdminController@storeDepartment')->name('storeDepartment');
 Route::get('/administration/deleteDepartment/{id}','AdminController@destroyDepartment')->name('deleteDepartment');
 Route::patch('/administration/editDepartment','AdminController@editDepartment')->name('editDepartment');
+
+
+
+Route::post('/administration/storePoste','AdminController@storePoste')->name('storePoste');
+Route::get('/administration/deletePoste/{id}','AdminController@destroyPoste')->name('deletePoste');
+Route::patch('/administration/editPoste','AdminController@editPoste')->name('editPoste');
+
+//editDoste
+Route::post('/administration/storeDepart','AdminController@storeDepart')->name('storeDepart');
+Route::patch('/administration/editDepart','AdminController@editDepart')->name('editDepart');
+Route::get('/administration/deleteDepart/{id}','AdminController@destroyDepart')->name('deleteDepart');
 
 /**
  * routes event
